@@ -1,0 +1,62 @@
+# ============================================================
+# WordPress .gitignore for Coolify Deployment
+# ============================================================
+
+# --- Sensitive config (credentials) ---
+wp-config.php
+
+# --- Local by Flywheel / LocalWP files ---
+local-xdebuginfo.php
+.local/
+.lando.yml
+
+# --- WordPress uploads (manage separately via FTP/SSH/S3) ---
+wp-content/uploads/
+
+# --- WordPress cache & temp files ---
+wp-content/cache/
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/backups/
+wp-content/wflogs/
+
+# --- WordPress auto-generated ---
+wp-content/advanced-cache.php
+wp-content/wp-cache-config.php
+wp-content/object-cache.php
+
+# --- WordPress core (optional: only if you manage WP core via composer) ---
+# Uncomment below to exclude WP core and only keep your theme/plugins:
+# /wp-admin/
+# /wp-includes/
+# /wp-*.php
+# /index.php
+# /xmlrpc.php
+# /license.txt
+# /readme.html
+
+# --- Node / npm ---
+node_modules/
+npm-debug.log
+yarn-error.log
+.npm
+
+# --- Environment files ---
+.env
+.env.local
+.env.production
+
+# --- IDE / OS ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+desktop.ini
+
+# --- Logs ---
+*.log
+error_log
+debug.log
