@@ -3,7 +3,8 @@ version: '3.8'
 services:
   # --------------------------------------------------------
   # WordPress Application
-  # No container_name — Coolify manages naming for Traefik routing
+  # Connected to both internal DB network AND Coolify's
+  # Traefik network so the proxy can route traffic to it.
   # --------------------------------------------------------
   wordpress:
     build:
@@ -34,9 +35,10 @@ services:
         condition: service_healthy
     networks:
       - wordpress_network
+      - coolify # ← allows Traefik to reach this container
 
   # --------------------------------------------------------
-  # MySQL Database
+  # MySQL Database (internal only, not exposed to Traefik)
   # --------------------------------------------------------
   db:
     image: mysql:8.0
@@ -65,3 +67,5 @@ volumes:
 networks:
   wordpress_network:
     driver: bridge
+  coolify:
+    external: true # ← Coolify's Traefik network (already exists on VPS)
