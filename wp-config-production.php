@@ -41,10 +41,20 @@ define( 'WP_CONTENT_URL', getenv('WP_HOME') . '/wp-content' );
 // ** Uploads: use a persistent Docker volume path ** //
 define( 'UPLOADS', 'wp-content/uploads' );
 
-// ** HTTPS / SSL (Coolify handles SSL termination via reverse proxy) ** //
+// ** HTTPS / SSL — Cloudflare Flexible SSL + Reverse Proxy fix ** //
+// Cloudflare sends CF-Visitor header with the original scheme
+if ( isset($_SERVER['HTTP_CF_VISITOR']) ) {
+    $cf_visitor = json_decode( $_SERVER['HTTP_CF_VISITOR'] );
+    if ( $cf_visitor && isset($cf_visitor->scheme) && $cf_visitor->scheme === 'https' ) {
+        $_SERVER['HTTPS'] = 'on';
+    }
+}
+// Generic reverse proxy header fallback
 if ( isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ) {
     $_SERVER['HTTPS'] = 'on';
 }
+// Prevent redirect loop: trust the proxy, don't force admin SSL separately
+define( 'FORCE_SSL_ADMIN', false );
 
 // ** Debug mode (disable in production) ** //
 define( 'WP_DEBUG',         getenv('WP_DEBUG') === 'true' );
