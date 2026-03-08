@@ -2,17 +2,14 @@ version: '3.8'
 
 services:
   # --------------------------------------------------------
-  # WordPress Application (built from your repo's Dockerfile)
-  # Coolify/Traefik handles port 80/443 routing automatically.
-  # Do NOT expose ports directly here — that causes conflicts.
+  # WordPress Application
+  # No container_name — Coolify manages naming for Traefik routing
   # --------------------------------------------------------
   wordpress:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: gootravel_wordpress
     restart: unless-stopped
-    # NO ports: mapping — Coolify's Traefik proxy manages routing
     environment:
       DB_HOST: db
       DB_NAME: ${DB_NAME}
@@ -21,7 +18,6 @@ services:
       DB_TABLE_PREFIX: ${DB_TABLE_PREFIX:-wp_}
       WP_HOME: ${WP_HOME}
       WP_SITEURL: ${WP_SITEURL}
-      # Secret keys — set these in Coolify env vars dashboard
       AUTH_KEY: ${AUTH_KEY}
       SECURE_AUTH_KEY: ${SECURE_AUTH_KEY}
       LOGGED_IN_KEY: ${LOGGED_IN_KEY}
@@ -44,7 +40,6 @@ services:
   # --------------------------------------------------------
   db:
     image: mysql:8.0
-    container_name: gootravel_db
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${DB_NAME}
