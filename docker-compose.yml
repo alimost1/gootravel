@@ -3,6 +3,8 @@ version: '3.8'
 services:
   # --------------------------------------------------------
   # WordPress Application (built from your repo's Dockerfile)
+  # Coolify/Traefik handles port 80/443 routing automatically.
+  # Do NOT expose ports directly here — that causes conflicts.
   # --------------------------------------------------------
   wordpress:
     build:
@@ -10,19 +12,16 @@ services:
       dockerfile: Dockerfile
     container_name: gootravel_wordpress
     restart: unless-stopped
-    ports:
-      - "80:80"
+    # NO ports: mapping — Coolify's Traefik proxy manages routing
     environment:
-      # Database connection
       DB_HOST: db
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_TABLE_PREFIX: ${DB_TABLE_PREFIX:-wp_}
-      # Site URLs
       WP_HOME: ${WP_HOME}
       WP_SITEURL: ${WP_SITEURL}
-      # Security keys (set in Coolify env vars)
+      # Secret keys — set these in Coolify env vars dashboard
       AUTH_KEY: ${AUTH_KEY}
       SECURE_AUTH_KEY: ${SECURE_AUTH_KEY}
       LOGGED_IN_KEY: ${LOGGED_IN_KEY}
@@ -31,10 +30,8 @@ services:
       SECURE_AUTH_SALT: ${SECURE_AUTH_SALT}
       LOGGED_IN_SALT: ${LOGGED_IN_SALT}
       NONCE_SALT: ${NONCE_SALT}
-      # Debug
       WP_DEBUG: ${WP_DEBUG:-false}
     volumes:
-      # Persist uploaded media across container restarts/redeploys
       - wp_uploads:/var/www/html/wp-content/uploads
     depends_on:
       db:
@@ -55,28 +52,21 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      # Persist database across container restarts/redeploys
       - db_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}" ]
       interval: 10s
       timeout: 5s
       retries: 5
     networks:
       - wordpress_network
 
-# --------------------------------------------------------
-# Named Volumes (data survives container rebuilds)
-# --------------------------------------------------------
 volumes:
   db_data:
     driver: local
   wp_uploads:
     driver: local
 
-# --------------------------------------------------------
-# Network
-# --------------------------------------------------------
 networks:
   wordpress_network:
     driver: bridge
