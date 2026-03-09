@@ -265,6 +265,18 @@ p {
     /* Fix standard image inline gap */
 }
 
+@media (max-width: 768px) {
+    .gt-logo {
+        margin-top: 50px;
+        margin-left: 0;
+    }
+
+    .gt-logo img {
+        height: 60px;
+        /* Adjust height as needed for mobile */
+    }
+}
+
 .gt-logo-text {
     font-family: var(--gt-font-heading);
     font-size: 1.5rem;
