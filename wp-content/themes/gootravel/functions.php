@@ -76,7 +76,7 @@ function gootravel_scripts() {
         'gootravel-style',
         get_stylesheet_uri(),
         array('gootravel-fonts', 'font-awesome'),
-        GOOTRAVEL_VERSION
+        filemtime(get_stylesheet_directory() . '/style.css')
     );
     
     // Theme JavaScript
