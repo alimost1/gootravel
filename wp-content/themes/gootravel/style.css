@@ -1552,8 +1552,8 @@ p {
     }
 
     .gt-hero-content {
-        padding-top: 100px;
-        /* Prevent overlap with absolute header */
+        padding-top: 150px;
+        /* Prevent overlap with absolute header and logo */
     }
 
     .gt-hero-search-container {
