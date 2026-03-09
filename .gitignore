@@ -20,6 +20,8 @@ wp-content/backup-db/
 wp-content/backups/
 wp-content/wpvividbackups/
 wp-content/wflogs/
+backups/
+*wpvivid*
 
 # --- WordPress auto-generated ---
 wp-content/advanced-cache.php
