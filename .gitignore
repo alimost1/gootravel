@@ -63,3 +63,18 @@ desktop.ini
 *.log
 error_log
 debug.log
+
+# --- Temp Debug Files ---
+check_style.css
+debug_style.css
+live_index.html
+verify_style.css
+root_style.css
+check_style.css
+debug_style.css
+verify_style.css
+verify_style.css
+debug_style.css
+live_index.html
+check_style.css
+
