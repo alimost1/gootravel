@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="gt-footer-bottom">
-            <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. All Rights Reserved.</p>
+            <p>&copy; <?php echo date('Y'); ?> Excursion Every day. Developed with Antigravity.</p>
         </div>
     </div>
 </footer>
