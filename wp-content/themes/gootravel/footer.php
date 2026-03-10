@@ -4,7 +4,7 @@
     <div class="gt-container">
         <div class="gt-footer-grid">
             <div class="gt-footer-brand">
-                <span class="gt-logo-text">excursion <span>Every day</span></span>
+                <span class="gt-logo-text">Excursion <span>Every day</span></span>
                 <p>Discover amazing tours and activities around the world.</p>
                 <div class="gt-footer-social">
                     <a href="#" class="gt-social-icon"><i class="fab fa-facebook-f"></i></a>
