@@ -26,7 +26,7 @@
                 <ul class="gt-footer-links">
                     <li><a href="#">Adventure Tours</a></li>
                     <li><a href="#">Guided Tours</a></li>
-                    <li><a href="#">Sightseeing</a></li>
+                    
                 </ul>
             </div>
             <div class="gt-footer-col">
