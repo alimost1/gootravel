@@ -4,7 +4,7 @@
     <div class="gt-container">
         <div class="gt-footer-grid">
             <div class="gt-footer-brand">
-                <span class="gt-logo-text">Goo<span>Travel</span></span>
+                <span class="gt-logo-text">Excursion <span>Every day</span></span>
                 <p>Discover amazing tours and activities around the world.</p>
                 <div class="gt-footer-social">
                     <a href="#" class="gt-social-icon"><i class="fab fa-facebook-f"></i></a>
@@ -32,7 +32,7 @@
             <div class="gt-footer-col">
                 <h4 class="gt-footer-title">Contact</h4>
                 <ul class="gt-footer-links">
-                    <li>info@gootravel.com</li>
+                    <li>info@excursioneveryday.com</li>
                     <li>+212 660-065842</li>
                 </ul>
             </div>
