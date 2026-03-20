@@ -24,11 +24,13 @@ $location_name = $locations ? $locations[0]->name : 'Paris';
 ?>
 
 <div class="gt-tour-hero-fullwidth">
-    <?php if (has_post_thumbnail()) : ?>
+    <?php if (has_post_thumbnail()): ?>
         <div class="gt-tour-bg" style="background-image: url('<?php echo get_the_post_thumbnail_url(null, 'full'); ?>');"></div>
-    <?php else : ?>
+    <?php
+else: ?>
         <div class="gt-tour-bg" style="background-image: url('https://picsum.photos/1920/800?random=100');"></div>
-    <?php endif; ?>
+    <?php
+endif; ?>
 </div>
 
 <section class="gt-section gt-single-tour">
@@ -39,31 +41,36 @@ $location_name = $locations ? $locations[0]->name : 'Paris';
             <div class="gt-tour-content">
                 <h2>Tour Activity Details</h2>
                 
-                <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                <?php if (have_posts()):
+    while (have_posts()):
+        the_post(); ?>
                     <div class="gt-tour-description">
                         <?php the_content(); ?>
                     </div>
                     
-                    <?php if (!get_the_content()) : ?>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dui ut ornare lectus sit. Dictum varius duis at consectetur lorem. Nunc scelerisque viverra mauris in aliquam sem fringilla ut morbi. Amet mauris commodo quis imperdiet massa. Maecenas ultricies mi eget mauris pharetra et ultrices. Amet nulla facilisi morbi tempus iaculis. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Vel facilisis volutpat est velit egestas dui id. Ipsum dolor sit amet consectetur adipiscing.</p>
-                    <?php endif; ?>
-                <?php endwhile; endif; ?>
+                    <?php if (!get_the_content()): ?>
+                        <p>ExecutionEveryday.com is a productivity and self-improvement platform dedicated to helping individuals achieve success through consistent daily execution. Focused on actionable strategies, the website provides valuable insights on productivity, habit building, goal setting, and personal development.</p>
+                    <?php
+        endif; ?>
+                <?php
+    endwhile;
+endif; ?>
                 
                 <?php
-                // Tour Gallery
-                $gallery_ids = get_post_meta(get_the_ID(), '_gootravel_gallery', true);
-                if ($gallery_ids) :
-                    $ids = array_filter(array_map('intval', explode(',', $gallery_ids)));
-                    if (!empty($ids)) :
-                ?>
+// Tour Gallery
+$gallery_ids = get_post_meta(get_the_ID(), '_gootravel_gallery', true);
+if ($gallery_ids):
+    $ids = array_filter(array_map('intval', explode(',', $gallery_ids)));
+    if (!empty($ids)):
+?>
                 <div class="gt-gallery-section">
                     <h2><i class="fas fa-images"></i> Tour Gallery</h2>
                     
                     <div class="gt-gallery-main" id="gt-gallery-main">
                         <?php
-                        $first_url = wp_get_attachment_image_url($ids[0], 'large');
-                        $first_full = wp_get_attachment_image_url($ids[0], 'full');
-                        ?>
+        $first_url = wp_get_attachment_image_url($ids[0], 'large');
+        $first_full = wp_get_attachment_image_url($ids[0], 'full');
+?>
                         <img src="<?php echo esc_url($first_url); ?>" 
                              data-full="<?php echo esc_url($first_full); ?>" 
                              alt="<?php the_title_attribute(); ?>" 
@@ -74,18 +81,20 @@ $location_name = $locations ? $locations[0]->name : 'Paris';
                     </div>
                     
                     <div class="gt-gallery-thumbs" id="gt-gallery-thumbs">
-                        <?php foreach ($ids as $index => $img_id) :
-                            $thumb_url = wp_get_attachment_image_url($img_id, 'thumbnail');
-                            $medium_url = wp_get_attachment_image_url($img_id, 'large');
-                            $full_url = wp_get_attachment_image_url($img_id, 'full');
-                            if (!$thumb_url) continue;
-                        ?>
+                        <?php foreach ($ids as $index => $img_id):
+            $thumb_url = wp_get_attachment_image_url($img_id, 'thumbnail');
+            $medium_url = wp_get_attachment_image_url($img_id, 'large');
+            $full_url = wp_get_attachment_image_url($img_id, 'full');
+            if (!$thumb_url)
+                continue;
+?>
                         <div class="gt-gallery-thumb<?php echo $index === 0 ? ' active' : ''; ?>" 
                              data-src="<?php echo esc_url($medium_url); ?>"
                              data-full="<?php echo esc_url($full_url); ?>">
                             <img src="<?php echo esc_url($thumb_url); ?>" alt="">
                         </div>
-                        <?php endforeach; ?>
+                        <?php
+        endforeach; ?>
                     </div>
                 </div>
                 
@@ -100,9 +109,9 @@ $location_name = $locations ? $locations[0]->name : 'Paris';
                     <div class="gt-lightbox-counter" id="gt-lightbox-counter"></div>
                 </div>
                 <?php
-                    endif;
-                endif;
-                ?>
+    endif;
+endif;
+?>
             </div>
             
             <!-- Booking Sidebar -->

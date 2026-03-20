@@ -75,24 +75,25 @@ get_header(); ?>
         
         <div class="gt-categories-grid">
             <?php
-            $categories = array(
-                array('name' => 'City Tours', 'icon' => 'fas fa-city', 'link' => '#'),
-                array('name' => 'Desert', 'icon' => 'fas fa-sun', 'link' => '#'),
-                array('name' => 'Food & Drink', 'icon' => 'fas fa-utensils', 'link' => '#'),
-                array('name' => 'Adventure', 'icon' => 'fas fa-mountain', 'link' => '#'),
-                array('name' => 'Couples', 'icon' => 'fas fa-heart', 'link' => '#'),
-                array('name' => 'Families', 'icon' => 'fas fa-users', 'link' => '#'),
-            );
-            
-            foreach ($categories as $cat) : 
-            ?>
+$categories = array(
+        array('name' => 'City Tours', 'icon' => 'fas fa-city', 'link' => '#'),
+        array('name' => 'Desert', 'icon' => 'fas fa-sun', 'link' => '#'),
+        array('name' => 'Food & Drink', 'icon' => 'fas fa-utensils', 'link' => '#'),
+        array('name' => 'Adventure', 'icon' => 'fas fa-mountain', 'link' => '#'),
+        array('name' => 'Couples', 'icon' => 'fas fa-heart', 'link' => '#'),
+        array('name' => 'Families', 'icon' => 'fas fa-users', 'link' => '#'),
+);
+
+foreach ($categories as $cat):
+?>
                 <a href="<?php echo $cat['link']; ?>" class="gt-category-card">
                     <div class="gt-category-icon">
                         <i class="<?php echo $cat['icon']; ?>"></i>
                     </div>
                     <h3 class="gt-category-name"><?php echo $cat['name']; ?></h3>
                 </a>
-            <?php endforeach; ?>
+            <?php
+endforeach; ?>
         </div>
     </div>
 </section>
@@ -105,7 +106,7 @@ get_header(); ?>
                 <span class="gt-section-label">Activities</span>
                 <h2 class="gt-section-title">Browse the most preferred<br>categories and activities.</h2>
             </div>
-            <p class="gt-section-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempo rincididunt ut labore et dolore magna aliqua.</p>
+            <p class="gt-section-desc">ExecutionEveryday.com is a productivity and self-improvement platform dedicated to helping individuals achieve success through consistent daily execution. Focused on actionable strategies, the website provides valuable insights on productivity, habit building, goal setting, and personal development.</p>
         </div>
         
         <!-- Filter Tabs -->
@@ -120,32 +121,33 @@ get_header(); ?>
         <!-- Activities Grid -->
         <div class="gt-activities-grid">
             <?php
-            $tours = new WP_Query(array(
-                'post_type'      => 'gootravel_tour',
-                'posts_per_page' => 8,
-                'orderby'        => 'date',
-                'order'          => 'DESC',
-            ));
-            
-            if ($tours->have_posts()) :
-                while ($tours->have_posts()) : $tours->the_post();
-                    get_template_part('template-parts/content', 'tour-card');
-                endwhile;
-                wp_reset_postdata();
-            else :
-                // Marrakech activities based on marrakechbestof.com
-                $demo_tours = array(
-                    array('title' => 'Quad Biking in Palmeraie', 'price' => 35, 'location' => 'Marrakech', 'duration' => '2 hours', 'rating' => 4.8, 'reviews' => 156, 'guide' => 'Hassan', 'company' => 'Marrakech Best Of', 'type' => 'terrestres'),
-                    array('title' => 'Agafay Desert Sunset Dinner', 'price' => 45, 'location' => 'Agafay Desert', 'duration' => '5 hours', 'rating' => 4.9, 'reviews' => 203, 'guide' => 'Youssef', 'company' => 'Desert Tours', 'type' => 'discovery'),
-                    array('title' => 'Hot Air Balloon Sunrise', 'price' => 180, 'location' => 'Marrakech', 'duration' => '3 hours', 'rating' => 5.0, 'reviews' => 89, 'guide' => 'Omar', 'company' => 'Sky Adventures', 'type' => 'airs'),
-                    array('title' => 'Camel Ride in Palmeraie', 'price' => 25, 'location' => 'Palmeraie', 'duration' => '1.5 hours', 'rating' => 4.6, 'reviews' => 312, 'guide' => 'Mohamed', 'company' => 'Marrakech Best Of', 'type' => 'terrestres'),
-                    array('title' => 'Ouzoud Waterfalls Day Trip', 'price' => 25, 'location' => 'Cascades Ouzoud', 'duration' => 'Full Day', 'rating' => 4.7, 'reviews' => 178, 'guide' => 'Rachid', 'company' => 'Excursions Maroc', 'type' => 'excursion'),
-                    array('title' => 'Essaouira Day Excursion', 'price' => 20, 'location' => 'Essaouira', 'duration' => 'Full Day', 'rating' => 4.8, 'reviews' => 245, 'guide' => 'Karim', 'company' => 'Marrakech Best Of', 'type' => 'excursion'),
-                    array('title' => 'Atlas Mountains & Berber Villages', 'price' => 30, 'location' => 'Atlas Mountains', 'duration' => 'Full Day', 'rating' => 4.9, 'reviews' => 167, 'guide' => 'Ahmed', 'company' => 'Mountain Tours', 'type' => 'excursion'),
-                    array('title' => 'Agafay Desert Overnight Camp', 'price' => 85, 'location' => 'Agafay Desert', 'duration' => '2 Days', 'rating' => 4.9, 'reviews' => 134, 'guide' => 'Ibrahim', 'company' => 'Desert Camps', 'type' => 'discovery'),
-                );
-                foreach ($demo_tours as $i => $demo) :
-                    ?>
+$tours = new WP_Query(array(
+    'post_type' => 'gootravel_tour',
+    'posts_per_page' => 8,
+    'orderby' => 'date',
+    'order' => 'DESC',
+));
+
+if ($tours->have_posts()):
+    while ($tours->have_posts()):
+        $tours->the_post();
+        get_template_part('template-parts/content', 'tour-card');
+    endwhile;
+    wp_reset_postdata();
+else:
+    // Marrakech activities based on marrakechbestof.com
+    $demo_tours = array(
+            array('title' => 'Quad Biking in Palmeraie', 'price' => 35, 'location' => 'Marrakech', 'duration' => '2 hours', 'rating' => 4.8, 'reviews' => 156, 'guide' => 'Hassan', 'company' => 'Marrakech Best Of', 'type' => 'terrestres'),
+            array('title' => 'Agafay Desert Sunset Dinner', 'price' => 45, 'location' => 'Agafay Desert', 'duration' => '5 hours', 'rating' => 4.9, 'reviews' => 203, 'guide' => 'Youssef', 'company' => 'Desert Tours', 'type' => 'discovery'),
+            array('title' => 'Hot Air Balloon Sunrise', 'price' => 180, 'location' => 'Marrakech', 'duration' => '3 hours', 'rating' => 5.0, 'reviews' => 89, 'guide' => 'Omar', 'company' => 'Sky Adventures', 'type' => 'airs'),
+            array('title' => 'Camel Ride in Palmeraie', 'price' => 25, 'location' => 'Palmeraie', 'duration' => '1.5 hours', 'rating' => 4.6, 'reviews' => 312, 'guide' => 'Mohamed', 'company' => 'Marrakech Best Of', 'type' => 'terrestres'),
+            array('title' => 'Ouzoud Waterfalls Day Trip', 'price' => 25, 'location' => 'Cascades Ouzoud', 'duration' => 'Full Day', 'rating' => 4.7, 'reviews' => 178, 'guide' => 'Rachid', 'company' => 'Excursions Maroc', 'type' => 'excursion'),
+            array('title' => 'Essaouira Day Excursion', 'price' => 20, 'location' => 'Essaouira', 'duration' => 'Full Day', 'rating' => 4.8, 'reviews' => 245, 'guide' => 'Karim', 'company' => 'Marrakech Best Of', 'type' => 'excursion'),
+            array('title' => 'Atlas Mountains & Berber Villages', 'price' => 30, 'location' => 'Atlas Mountains', 'duration' => 'Full Day', 'rating' => 4.9, 'reviews' => 167, 'guide' => 'Ahmed', 'company' => 'Mountain Tours', 'type' => 'excursion'),
+            array('title' => 'Agafay Desert Overnight Camp', 'price' => 85, 'location' => 'Agafay Desert', 'duration' => '2 Days', 'rating' => 4.9, 'reviews' => 134, 'guide' => 'Ibrahim', 'company' => 'Desert Camps', 'type' => 'discovery'),
+    );
+    foreach ($demo_tours as $i => $demo):
+?>
                     <article class="gt-activity-card">
                         <div class="gt-activity-image">
                             <img src="https://picsum.photos/400/300?random=<?php echo $i; ?>" alt="<?php echo esc_attr($demo['title']); ?>">
@@ -159,9 +161,10 @@ get_header(); ?>
                             <h3 class="gt-activity-title"><a href="#"><?php echo $demo['title']; ?></a></h3>
                             <div class="gt-activity-rating">
                                 <div class="gt-stars">
-                                    <?php for ($s = 1; $s <= 5; $s++) : ?>
+                                    <?php for ($s = 1; $s <= 5; $s++): ?>
                                         <i class="<?php echo $s <= $demo['rating'] ? 'fas' : 'far'; ?> fa-star"></i>
-                                    <?php endfor; ?>
+                                    <?php
+        endfor; ?>
                                 </div>
                                 <span class="gt-rating-count">(<?php echo $demo['reviews']; ?> ratings)</span>
                             </div>
@@ -176,9 +179,10 @@ get_header(); ?>
                             </div>
                         </div>
                     </article>
-                <?php endforeach;
-            endif;
-            ?>
+                <?php
+    endforeach;
+endif;
+?>
         </div>
         
         <div style="text-align: center; margin-top: 40px;">
@@ -205,22 +209,22 @@ get_header(); ?>
         
         <div class="gt-locations-grid">
             <?php
-            // Get locations from taxonomy
-            $locations = get_terms(array(
-                'taxonomy'   => 'tour_location',
-                'hide_empty' => false,
-                'number'     => 8,
-            ));
-            
-            if (!empty($locations) && !is_wp_error($locations)) :
-                foreach ($locations as $idx => $location) :
-                    $image_url = gootravel_get_location_image($location->term_id, 'gootravel-card-large');
-                    if (!$image_url) {
-                        $image_url = 'https://picsum.photos/300/400?random=' . (20 + $idx);
-                    }
-                    $tour_count = $location->count;
-                    $location_link = get_term_link($location);
-            ?>
+// Get locations from taxonomy
+$locations = get_terms(array(
+    'taxonomy' => 'tour_location',
+    'hide_empty' => false,
+    'number' => 8,
+));
+
+if (!empty($locations) && !is_wp_error($locations)):
+    foreach ($locations as $idx => $location):
+        $image_url = gootravel_get_location_image($location->term_id, 'gootravel-card-large');
+        if (!$image_url) {
+            $image_url = 'https://picsum.photos/300/400?random=' . (20 + $idx);
+        }
+        $tour_count = $location->count;
+        $location_link = get_term_link($location);
+?>
                 <a href="<?php echo esc_url($location_link); ?>" class="gt-location-card">
                     <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($location->name); ?>">
                     <div class="gt-location-content">
@@ -235,18 +239,18 @@ get_header(); ?>
                         </div>
                     </div>
                 </a>
-            <?php 
-                endforeach;
-            else :
-                // Fallback demo locations if no terms exist
-                $demo_locations = array(
-                    array('name' => 'Marrakech', 'tours' => 12),
-                    array('name' => 'Agafay Desert', 'tours' => 8),
-                    array('name' => 'Essaouira', 'tours' => 6),
-                    array('name' => 'Atlas Mountains', 'tours' => 10),
-                );
-                foreach ($demo_locations as $idx => $loc) :
-            ?>
+            <?php
+    endforeach;
+else:
+    // Fallback demo locations if no terms exist
+    $demo_locations = array(
+            array('name' => 'Marrakech', 'tours' => 12),
+            array('name' => 'Agafay Desert', 'tours' => 8),
+            array('name' => 'Essaouira', 'tours' => 6),
+            array('name' => 'Atlas Mountains', 'tours' => 10),
+    );
+    foreach ($demo_locations as $idx => $loc):
+?>
                 <div class="gt-location-card">
                     <img src="https://picsum.photos/300/400?random=<?php echo 20 + $idx; ?>" alt="<?php echo esc_attr($loc['name']); ?>">
                     <div class="gt-location-content">
@@ -261,10 +265,10 @@ get_header(); ?>
                         </div>
                     </div>
                 </div>
-            <?php 
-                endforeach;
-            endif;
-            ?>
+            <?php
+    endforeach;
+endif;
+?>
         </div>
     </div>
 </section>
@@ -279,14 +283,14 @@ get_header(); ?>
         
         <div class="gt-testimonials-grid">
             <?php
-            $testimonials = array(
-                array('title' => 'Great Activity', 'role' => 'Manager'),
-                array('title' => 'Friendly Team', 'role' => 'Manager'),
-                array('title' => 'Fast and Safe', 'role' => 'Freelancer'),
-            );
-            
-            foreach ($testimonials as $idx => $test) :
-            ?>
+$testimonials = array(
+        array('title' => 'Great Activity', 'role' => 'Manager'),
+        array('title' => 'Friendly Team', 'role' => 'Manager'),
+        array('title' => 'Fast and Safe', 'role' => 'Freelancer'),
+);
+
+foreach ($testimonials as $idx => $test):
+?>
                 <div class="gt-testimonial-card">
                     <div class="gt-testimonial-icon"><i class="fas fa-quote-left"></i></div>
                     <h4 class="gt-testimonial-title"><?php echo $test['title']; ?></h4>
@@ -301,7 +305,8 @@ get_header(); ?>
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            <?php
+endforeach; ?>
         </div>
         
         <div class="gt-testimonials-dots">

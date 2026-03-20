@@ -30,6 +30,7 @@ services:
       WP_DEBUG: ${WP_DEBUG:-false}
     volumes:
       - wp_uploads:/var/www/html/wp-content/uploads
+      - data/coolify/services/josgk00c0ook04cs8cck00c4/themes:/var/www/html/wp-content/themes
     depends_on:
       db:
         condition: service_healthy
